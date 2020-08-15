@@ -9,7 +9,7 @@ class TestGrafo(unittest.TestCase):
         #le agrego un vértice
         grafo.agregar_vertice("A")
         #me fijo si el vértice pertenece o no al grafo
-        self.assertEqual(grafo.vertice_pertenece("A"), True)
+        self.assertTrue(grafo.vertice_pertenece("A"))
 
 
 if __name__ == '__main__':
