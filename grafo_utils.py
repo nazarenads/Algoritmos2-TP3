@@ -18,4 +18,6 @@ def bfs(grafo, origen, destino = None):
                 orden[w] = orden[v] + 1
                 visitados.add(w)
                 cola.append(w)
+        if destino != None and v == destino:
+            break
     return padre, orden
