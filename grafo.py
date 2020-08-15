@@ -22,7 +22,6 @@ class Grafo:
         self.grafo[v][w] = peso
         if not self.dirigido:
             self.grafo[w][v] = peso
-        return True
 
     def ver_cantidad_vertices(self):
         return self.cantidad_vertices
