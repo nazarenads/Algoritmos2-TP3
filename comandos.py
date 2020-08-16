@@ -1,5 +1,10 @@
+from constantes import LISTA_COMANDOS
 from grafo_utils import *
 from grafo import Grafo
+
+def imprimir_operaciones():
+    for comando in LISTA_COMANDOS[1:]:
+        print(f"{comando}")
 
 def reconstruir_camino(padres, origen, destino):
     camino = []

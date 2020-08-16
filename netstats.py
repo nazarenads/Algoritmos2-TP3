@@ -2,8 +2,9 @@
 import os
 import sys
 
-from comandos import diametro
-from constantes import LISTA_COMANDOS, COMANDO_CAMINO_MINIMO, COMANDO_DIAMETRO
+from comandos import diametro, imprimir_operaciones
+from constantes import LISTA_COMANDOS, COMANDO_CAMINO_MINIMO, COMANDO_DIAMETRO, \
+    COMANDO_LISTAR_OPERACIONES
 from grafo import Grafo
 
 
@@ -51,6 +52,8 @@ def procesar_comandos(grafo):
         print("camino minimo")
     elif comando[0] == COMANDO_DIAMETRO:
         diametro(grafo)
+    elif comando[0] == COMANDO_LISTAR_OPERACIONES:
+        imprimir_operaciones()
 
 
 if __name__ == '__main__':
