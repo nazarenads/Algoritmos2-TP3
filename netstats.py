@@ -18,8 +18,20 @@ def cargar_datos_tsv(nombre_tsv):
 
 def crear_red(datos):
     grafo = Grafo(True)
+    crear_vertices(datos, grafo)
+    crear_aristas(datos, grafo)
+
+
+def crear_vertices(datos, grafo):
     for dato in datos:
-        grafo.agregar_vertice(dato[0])
+        for i in range(len(dato)):
+            grafo.agregar_vertice(dato[i])
+
+
+def crear_aristas(datos, grafo):
+    for dato in datos:
+        for i in range(1, len(dato)):
+            grafo.agregar_arista(dato[0], dato[i])
 
 
 def procesar_archivo(archivo_tsv):
