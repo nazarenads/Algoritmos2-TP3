@@ -2,6 +2,7 @@
 import os
 import sys
 
+from constantes import LISTA_COMANDOS, COMANDO_CAMINO_MINIMO, COMANDO_DIAMETRO
 from grafo import Grafo
 
 
@@ -22,7 +23,6 @@ def crear_red(datos):
     grafo = Grafo(True)
     crear_vertices(datos, grafo)
     crear_aristas(datos, grafo)
-    #print(grafo.ver_cantidad_vertices())
 
 
 def crear_vertices(datos, grafo):
@@ -42,6 +42,18 @@ def procesar_archivo(archivo_tsv):
     crear_red(datos)
 
 
+def procesar_comandos():
+    entrada = input('Ingrese un comando:')
+    comando = entrada.split(" ")
+    if comando[0] not in LISTA_COMANDOS:
+        print(f"El comando {entrada} no existe.")
+    if comando[0] == COMANDO_CAMINO_MINIMO:
+        print("camino minimo")
+    elif comando[0] == COMANDO_DIAMETRO:
+        print("diametro")
+
+
 if __name__ == '__main__':
     archivo_tsv = sys.argv[1]
     procesar_archivo(archivo_tsv)
+    procesar_comandos()
