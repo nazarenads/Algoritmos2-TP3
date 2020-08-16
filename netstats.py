@@ -2,6 +2,7 @@
 import os
 import sys
 
+from comandos import diametro
 from constantes import LISTA_COMANDOS, COMANDO_CAMINO_MINIMO, COMANDO_DIAMETRO
 from grafo import Grafo
 
@@ -19,8 +20,7 @@ def cargar_datos_tsv(nombre_tsv):
         raise Exception(f"El archivo {nombre_tsv} no existe")
 
 
-def crear_red(datos):
-    grafo = Grafo(True)
+def crear_red(datos, grafo):
     crear_vertices(datos, grafo)
     crear_aristas(datos, grafo)
 
@@ -37,12 +37,12 @@ def crear_aristas(datos, grafo):
             grafo.agregar_arista(dato[0], articulo)
 
 
-def procesar_archivo(archivo_tsv):
+def procesar_archivo(archivo_tsv, grafo):
     datos = cargar_datos_tsv(archivo_tsv)
-    crear_red(datos)
+    crear_red(datos, grafo)
 
 
-def procesar_comandos():
+def procesar_comandos(grafo):
     entrada = input('Ingrese un comando:')
     comando = entrada.split(" ")
     if comando[0] not in LISTA_COMANDOS:
@@ -50,10 +50,11 @@ def procesar_comandos():
     if comando[0] == COMANDO_CAMINO_MINIMO:
         print("camino minimo")
     elif comando[0] == COMANDO_DIAMETRO:
-        print("diametro")
+        diametro(grafo)
 
 
 if __name__ == '__main__':
     archivo_tsv = sys.argv[1]
-    procesar_archivo(archivo_tsv)
-    procesar_comandos()
+    grafo = Grafo(True)
+    procesar_archivo(archivo_tsv, grafo)
+    procesar_comandos(grafo)
