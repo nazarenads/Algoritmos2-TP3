@@ -42,7 +42,7 @@ def diametro(grafo):
             orden_max = orden
             destino_max = max(orden, key=orden_max.get)
             origen_max = v
-    camino_max = reconstruir_camino(padres, v, destino_max)
+    camino_max = reconstruir_camino(padres, origen_max, destino_max)
     mostrar_camino(camino_max, destino_max, orden_max)
 
 def main():
