@@ -63,6 +63,8 @@ def todos_en_rango(grafo, pagina, n):
 
 def navegacion_primer_link(grafo, origen):
     padre, orden = dfs_primer_link(grafo, origen)
+    print(padre)
+    print(orden)
     camino = reconstruir_camino(padre, origen, None)
     mostrar_camino(camino, None, orden)
 
