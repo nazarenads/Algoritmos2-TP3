@@ -52,18 +52,26 @@ def diametro(grafo):
     camino_max = reconstruir_camino(padres_max, origen_max, destino_max)
     mostrar_camino(camino_max, destino_max, orden_max)
 
+def todos_en_rango(grafo, pagina, n):
+    padres, orden = bfs(grafo, pagina)
+    cont = 0
+    for x in orden.values():
+        if x == n:
+            cont += 1
+    print(cont)
+
+
 def main():
     grafo = Grafo(True)
     grafo.agregar_vertice("A")
     grafo.agregar_vertice("B")
     grafo.agregar_vertice("C")
     grafo.agregar_vertice("D")
+    grafo.agregar_vertice("E")
     grafo.agregar_arista("A", "C")
     grafo.agregar_arista("C", "B")
     grafo.agregar_arista("B", "D")
-    camino_minimo(grafo, "A", "D")
-    dic = {"A": 4, "B": 2}
-    max_dic = max(dic, key=dic.get)
-    print(max_dic)
+    grafo.agregar_arista("C", "E")
+    todos_en_rango(grafo, "A", 2)
 
 main()
