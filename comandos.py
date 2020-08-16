@@ -31,6 +31,7 @@ def camino_minimo(grafo, origen, destino = None):
 
 def diametro(grafo):
     orden_max = {}
+    padres_max = {}
     costo_max = 0
     origen_max = ""
     destino_max = ""
@@ -40,9 +41,10 @@ def diametro(grafo):
         if(costo > costo_max):
             costo_max = costo
             orden_max = orden
+            padres_max = padres
             destino_max = max(orden, key=orden_max.get)
             origen_max = v
-    camino_max = reconstruir_camino(padres, origen_max, destino_max)
+    camino_max = reconstruir_camino(padres_max, origen_max, destino_max)
     mostrar_camino(camino_max, destino_max, orden_max)
 
 def main():
