@@ -52,6 +52,29 @@ def diametro(grafo):
     camino_max = reconstruir_camino(padres_max, origen_max, destino_max)
     mostrar_camino(camino_max, destino_max, orden_max)
 
+
+def navegacion_primer_link(grafo, origen):
+    visitados = set()
+    padre = {}
+    orden = {}
+    padre[origen] = None
+    visitados.add(origen)
+    orden[origen] = 0
+    _navegacion_primer_link(grafo, origen, visitados, padre, orden)
+    return padre, orden
+
+
+def _navegacion_primer_link(grafo, vertice, visitados, padre, orden):
+    adyacentes = grafo.obtener_adyacentes(vertice)
+    if len(adyacentes) == 0 or orden[vertice] == 19:
+        return visitados
+    primer_adyacente = adyacentes[0]
+    visitados.add(primer_adyacente)
+    padre[primer_adyacente] = vertice
+    orden[primer_adyacente] = orden[vertice] + 1
+    _navegacion_primer_link(grafo, primer_adyacente)
+
+
 def main():
     grafo = Grafo(True)
     grafo.agregar_vertice("A")
