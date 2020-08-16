@@ -21,8 +21,7 @@ def camino_minimo(grafo, origen, destino):
         else:
             resultado += v
     if destino not in orden:
-        print(origen)
-        print("Costo: 0")
+        print("No se encontro recorrido")
     else:
         print(resultado)
         print(f"Costo: {orden[destino]}")
