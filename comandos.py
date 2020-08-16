@@ -22,8 +22,7 @@ def camino_minimo(grafo, origen, destino):
         else:
             resultado += v
     print(resultado)
-    costo = max(orden.values())
-    print(f"Costo: {costo}")
+    print(f"Costo: {orden[destino]}")
 
 def main():
     grafo = Grafo(True)
