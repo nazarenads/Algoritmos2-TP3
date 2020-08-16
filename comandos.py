@@ -65,7 +65,7 @@ def navegacion_primer_link(grafo, origen):
     padre, orden = dfs_primer_link(grafo, origen)
     print(padre)
     print(orden)
-    destino = max(orden, key=orden_max.get)
+    destino = max(orden, key=orden.get)
     camino = reconstruir_camino(padre, origen, destino)
     mostrar_camino(camino, destino, orden)
 
