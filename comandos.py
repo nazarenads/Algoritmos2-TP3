@@ -61,27 +61,29 @@ def todos_en_rango(grafo, pagina, n):
     print(cont)
 
 
-
 def navegacion_primer_link(grafo, origen):
-    visitados = set()
+    padre, orden = dfs_primer_link(grafo, origen)
+    camino = reconstruir_camino(padre, origen, None)
+    mostrar_camino(camino, None, orden)
+
+
+def dfs_primer_link(grafo, origen):
     padre = {}
     orden = {}
     padre[origen] = None
-    visitados.add(origen)
     orden[origen] = 0
-    _navegacion_primer_link(grafo, origen, visitados, padre, orden)
+    _dfs_primer_link(grafo, origen, padre, orden)
     return padre, orden
 
 
-def _navegacion_primer_link(grafo, vertice, visitados, padre, orden):
+def _dfs_primer_link(grafo, vertice, padre, orden):
     adyacentes = grafo.obtener_adyacentes(vertice)
     if len(adyacentes) == 0 or orden[vertice] == 19:
-        return visitados
+        return
     primer_adyacente = adyacentes[0]
-    visitados.add(primer_adyacente)
     padre[primer_adyacente] = vertice
     orden[primer_adyacente] = orden[vertice] + 1
-    _navegacion_primer_link(grafo, primer_adyacente)
+    _dfs_primer_link(grafo, primer_adyacente, padre, orden)
 
 
 def main():

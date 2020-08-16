@@ -2,9 +2,10 @@
 import os
 import sys
 
-from comandos import diametro, imprimir_operaciones, todos_en_rango
+from comandos import diametro, imprimir_operaciones, todos_en_rango, \
+    navegacion_primer_link
 from constantes import LISTA_COMANDOS, COMANDO_CAMINO_MINIMO, COMANDO_DIAMETRO, \
-    COMANDO_LISTAR_OPERACIONES, COMANDO_RANGO
+    COMANDO_LISTAR_OPERACIONES, COMANDO_RANGO, COMANDO_NAVEGACION
 from grafo import Grafo
 
 
@@ -57,6 +58,8 @@ def procesar_comandos(grafo):
     elif comando[0] == COMANDO_RANGO:
         parametros = comando[1].split(",")
         todos_en_rango(grafo, parametros[0], int(parametros[1]))
+    elif comando[0] == COMANDO_NAVEGACION:
+        navegacion_primer_link(grafo, comando[1])
 
 
 if __name__ == '__main__':
