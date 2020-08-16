@@ -4,7 +4,7 @@ from grafo import Grafo
 
 def imprimir_operaciones():
     for comando in LISTA_COMANDOS[1:]:
-        print(f"{comando}")
+        print(comando)
 
 def reconstruir_camino(padres, origen, destino):
     camino = []
