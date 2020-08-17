@@ -101,12 +101,8 @@ def conectividad(grafo, origen):
     todas_cfc = componentes_fuertemente_conexas(
         origen, grafo, visitados, apilados, orden, mb, pila, todas_cfc
     )
-    resultado = ""
-    last_index = len(todas_cfc) - 1
-    for v in todas_cfc[:last_index]:
-        resultado += v + ","
-    resultado += todas_cfc[last_index]
-    print(resultado)
+    for cfc in todas_cfc:
+        print(cfc)
     new_list = [seq[0] for seq in todas_cfc]
     with open('out.txt','w') as f:
         print(new_list, file=f)
