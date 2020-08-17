@@ -103,9 +103,8 @@ def conectividad(grafo, origen):
     )
     for cfc in todas_cfc:
         print(cfc)
-    new_list = [seq[0] for seq in todas_cfc]
     with open('out.txt','w') as f:
-        print(new_list, file=f)
+        print(todas_cfc, file=f)
 
 def main():
     grafo = Grafo(True)
