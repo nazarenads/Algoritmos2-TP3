@@ -48,7 +48,7 @@ def procesar_archivo(archivo_tsv, grafo):
 
 def procesar_comandos(grafo):
     entrada = input('Ingrese un comando:')
-    comando = entrada.split(" ")
+    comando = entrada.split(" ", maxsplit=1)
     if comando[0] not in LISTA_COMANDOS:
         print(f"El comando {entrada} no existe.")
     if comando[0] == COMANDO_CAMINO_MINIMO:
