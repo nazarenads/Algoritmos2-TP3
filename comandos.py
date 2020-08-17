@@ -71,10 +71,13 @@ def navegacion_primer_link(grafo, origen):
     orden = {}
     camino.append(origen)
     orden[origen] = 0
-    destino = max(orden, key=orden.get)
     _dfs_primer_link(grafo, origen, orden, camino)
-    print(camino)
-    mostrar_camino(camino, destino, orden)
+    last_index = len(camino) - 1
+    resultado = ""
+    for v in camino[:last_index]:
+        resultado += v + " -> "
+    resultado += camino[last_index]
+    print(resultado)
 
 
 def _dfs_primer_link(grafo, vertice, orden, camino):
