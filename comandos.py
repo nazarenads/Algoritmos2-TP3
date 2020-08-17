@@ -90,6 +90,27 @@ def _dfs_primer_link(grafo, vertice, orden, camino):
     _dfs_primer_link(grafo, primer_adyacente, orden, camino)
 
 
+def conectividad(grafo, origen):
+    visitados = set()
+    apilados = set()
+    orden = dict()
+    orden[origen] = 0
+    mb = dict()
+    pila = deque()
+    todas_cfc = []
+    todas_cfc = componentes_fuertemente_conexas(
+        origen, grafo, visitados, apilados, orden, mb, pila, todas_cfc
+    )
+    resultado = ""
+    last_index = len(todas_cfc) - 1
+    for v in todas_cfc[:last_index]:
+        resultado += v + ","
+    resultado += todas_cfc[last_index]
+    print(resultado)
+    new_list = [seq[0] for seq in todas_cfc]
+    with open('out.txt','w') as f:
+        print(new_list, file=f)
+
 def main():
     grafo = Grafo(True)
     grafo.agregar_vertice("A")
