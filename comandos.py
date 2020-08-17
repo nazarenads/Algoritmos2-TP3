@@ -27,12 +27,16 @@ def mostrar_camino(camino, destino, orden):
         print("No se encontro recorrido")
     else:
         print(resultado)
-        print(f"Costo: {orden[destino]}")
 
-def camino_minimo(grafo, origen, destino = None):
+def imprimir_costo(destino, orden):
+    print(f"Costo: {orden[destino]}")
+
+
+def camino_minimo(grafo, origen, destino=None):
     padres, orden = bfs(grafo, origen, destino)
     camino = reconstruir_camino(padres, origen, destino)
     mostrar_camino(camino, destino, orden)
+    imprimir_costo(destino, orden)
 
 def diametro(grafo):
     orden_max = {}
@@ -51,6 +55,7 @@ def diametro(grafo):
             origen_max = v
     camino_max = reconstruir_camino(padres_max, origen_max, destino_max)
     mostrar_camino(camino_max, destino_max, orden_max)
+    imprimir_costo(destino_max, orden_max)
 
 def todos_en_rango(grafo, pagina, n):
     padres, orden = bfs(grafo, pagina)
@@ -65,7 +70,7 @@ def navegacion_primer_link(grafo, origen):
     padre, orden = dfs_primer_link(grafo, origen)
     print(padre)
     print(orden)
-    destino = max(orden, key=orden_max.get)
+    destino = max(orden, key=orden.get)
     camino = reconstruir_camino(padre, origen, destino)
     mostrar_camino(camino, destino, orden)
 
