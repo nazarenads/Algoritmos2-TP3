@@ -101,10 +101,12 @@ def conectividad(grafo, origen):
     todas_cfc = componentes_fuertemente_conexas(
         origen, grafo, visitados, apilados, orden, mb, pila, todas_cfc
     )
+    resultado = ""
     for cfc in todas_cfc:
-        print(cfc)
+        resultado = ",".join(cfc)
+    print(resultado)
     with open('out.txt','w') as f:
-        print(todas_cfc, file=f)
+        print(resultado, file=f)
 
 def main():
     grafo = Grafo(True)
