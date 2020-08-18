@@ -53,4 +53,3 @@ def componentes_fuertemente_conexas(
 
         #print('NUEVA CFC!: ', nueva_cfc)
         todas_cfc.append(nueva_cfc)
-    return todas_cfc

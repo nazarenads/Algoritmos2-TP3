@@ -98,15 +98,13 @@ def conectividad(grafo, origen):
     mb = dict()
     pila = deque()
     todas_cfc = []
-    todas_cfc = componentes_fuertemente_conexas(
+    componentes_fuertemente_conexas(
         origen, grafo, visitados, apilados, orden, mb, pila, todas_cfc
     )
-    resultado = ""
-    for cfc in todas_cfc:
-        resultado = ",".join(cfc)
+    cfc_pedida = todas_cfc[len(todas_cfc)-1]
+    resultado = ", ".join(cfc_pedida)
     print(resultado)
-    with open('out.txt','w') as f:
-        print(resultado, file=f)
+
 
 def main():
     grafo = Grafo(True)

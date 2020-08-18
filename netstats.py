@@ -3,11 +3,22 @@ import os
 import sys
 import faulthandler; faulthandler.enable()
 
-from comandos import diametro, imprimir_operaciones, todos_en_rango, \
-    navegacion_primer_link, conectividad
-from constantes import LISTA_COMANDOS, COMANDO_CAMINO_MINIMO, COMANDO_DIAMETRO, \
-    COMANDO_LISTAR_OPERACIONES, COMANDO_RANGO, COMANDO_NAVEGACION, \
-    COMANDO_CONECTIVIDAD
+from comandos import (
+    diametro,
+    imprimir_operaciones,
+    todos_en_rango,
+    navegacion_primer_link,
+    conectividad
+)
+from constantes import (
+    LISTA_COMANDOS,
+    COMANDO_CAMINO_MINIMO,
+    COMANDO_DIAMETRO,
+    COMANDO_LISTAR_OPERACIONES,
+    COMANDO_RANGO,
+    COMANDO_NAVEGACION,
+    COMANDO_CONECTIVIDAD,
+    COMANDO_COMUNIDADES)
 from grafo import Grafo
 
 
@@ -46,24 +57,29 @@ def procesar_archivo(archivo_tsv, grafo):
     crear_red(datos, grafo)
 
 
-def procesar_comandos(grafo):
-    entrada = input('Ingrese un comando:')
-    comando = entrada.split(" ", maxsplit=1)
-    if comando[0] not in LISTA_COMANDOS:
-        print(f"El comando {entrada} no existe.")
-    if comando[0] == COMANDO_CAMINO_MINIMO:
-        print("camino minimo")
-    elif comando[0] == COMANDO_DIAMETRO:
-        diametro(grafo)
-    elif comando[0] == COMANDO_LISTAR_OPERACIONES:
-        imprimir_operaciones()
-    elif comando[0] == COMANDO_RANGO:
-        parametros = comando[1].split(",")
-        todos_en_rango(grafo, parametros[0], int(parametros[1]))
-    elif comando[0] == COMANDO_NAVEGACION:
-        navegacion_primer_link(grafo, comando[1])
-    elif comando[0] == COMANDO_CONECTIVIDAD:
-        conectividad(grafo, comando[1])
+def procesar_comandos(grafo, stdin):
+    print("Ingrese un comando:")
+    for entrada in stdin:
+        entrada = entrada.rstrip()
+        comandos = entrada.split(" ", maxsplit=1)
+        comando = comandos[0].strip()
+        if comando not in LISTA_COMANDOS:
+            print(f"El comando {entrada} no existe.")
+        if comando == COMANDO_CAMINO_MINIMO:
+            print("camino minimo")
+        elif comando == COMANDO_DIAMETRO:
+            diametro(grafo)
+        elif comando == COMANDO_LISTAR_OPERACIONES:
+            imprimir_operaciones()
+        elif comando == COMANDO_RANGO:
+            parametros = comandos[1].split(",")
+            todos_en_rango(grafo, parametros[0], int(parametros[1]))
+        elif comando == COMANDO_NAVEGACION:
+            navegacion_primer_link(grafo, comandos[1])
+        elif comando == COMANDO_CONECTIVIDAD:
+            conectividad(grafo, comandos[1])
+        elif comando == COMANDO_COMUNIDADES:
+            pass
 
 
 
@@ -72,4 +88,4 @@ if __name__ == '__main__':
     archivo_tsv = sys.argv[1]
     grafo = Grafo(True)
     procesar_archivo(archivo_tsv, grafo)
-    procesar_comandos(grafo)
+    procesar_comandos(grafo, sys.stdin)
