@@ -8,8 +8,8 @@ from comandos import (
     imprimir_operaciones,
     todos_en_rango,
     navegacion_primer_link,
-    conectividad
-)
+    conectividad,
+    comunidades)
 from constantes import (
     LISTA_COMANDOS,
     COMANDO_CAMINO_MINIMO,
@@ -79,7 +79,7 @@ def procesar_comandos(grafo, stdin):
         elif comando == COMANDO_CONECTIVIDAD:
             conectividad(grafo, comandos[1])
         elif comando == COMANDO_COMUNIDADES:
-            pass
+            comunidades(grafo, comandos[1])
 
 
 
