@@ -12,8 +12,8 @@ from comandos import (
     navegacion_primer_link,
     conectividad,
     comunidades,
-    lectura
-)
+    lectura,
+    ciclo)
 from constantes import (
     LISTA_COMANDOS,
     COMANDO_CAMINO_MINIMO,
@@ -22,7 +22,7 @@ from constantes import (
     COMANDO_RANGO,
     COMANDO_NAVEGACION,
     COMANDO_CONECTIVIDAD,
-    COMANDO_COMUNIDADES, COMANDO_LECTURA)
+    COMANDO_COMUNIDADES, COMANDO_LECTURA, COMANDO_CICLO)
 from grafo import Grafo
 
 
@@ -88,6 +88,9 @@ def procesar_comandos(grafo, stdin):
         elif comando == COMANDO_LECTURA:
             parametros = comandos[1].split(",")
             lectura(grafo, parametros)
+        elif comando == COMANDO_CICLO:
+            parametros = comandos[1].split(",")
+            ciclo(grafo, parametros[0], int(parametros[1]))
 
 
 if __name__ == '__main__':
