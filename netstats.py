@@ -59,6 +59,7 @@ def procesar_archivo(archivo_tsv, grafo):
 
 def procesar_comandos(grafo, stdin):
     print("Ingrese un comando:")
+    cfc_guardada = []
     for entrada in stdin:
         entrada = entrada.rstrip()
         comandos = entrada.split(" ", maxsplit=1)
@@ -77,7 +78,7 @@ def procesar_comandos(grafo, stdin):
         elif comando == COMANDO_NAVEGACION:
             navegacion_primer_link(grafo, comandos[1])
         elif comando == COMANDO_CONECTIVIDAD:
-            conectividad(grafo, comandos[1])
+            cfc_guardada = conectividad(grafo, comandos[1], cfc_guardada)
         elif comando == COMANDO_COMUNIDADES:
             comunidades(grafo, comandos[1])
 

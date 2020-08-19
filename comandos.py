@@ -92,7 +92,7 @@ def _dfs_primer_link(grafo, vertice, orden, camino):
     _dfs_primer_link(grafo, primer_adyacente, orden, camino)
 
 
-def conectividad(grafo, origen):
+def conectividad(grafo, origen, cfc_guardada):
     visitados = set()
     apilados = set()
     orden = dict()
@@ -100,12 +100,14 @@ def conectividad(grafo, origen):
     mb = dict()
     pila = deque()
     todas_cfc = []
-    componentes_fuertemente_conexas(
-        origen, grafo, visitados, apilados, orden, mb, pila, todas_cfc
-    )
-    cfc_pedida = todas_cfc[len(todas_cfc)-1]
-    resultado = ", ".join(cfc_pedida)
+    if origen not in cfc_guardada:
+        componentes_fuertemente_conexas(
+            origen, grafo, visitados, apilados, orden, mb, pila, todas_cfc
+        )
+        cfc_guardada = todas_cfc[len(todas_cfc)-1]
+    resultado = ", ".join(cfc_guardada)
     print(resultado)
+    return cfc_guardada
 
 
 def max_frec(label, vecinos):
