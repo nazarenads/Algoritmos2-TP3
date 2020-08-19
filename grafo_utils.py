@@ -52,15 +52,16 @@ def grados_entrada(grafo, paginas):
     for v in paginas:
         grados_ent[v] = 0
     for v in paginas:
-        for w in grafo.adyacentes(v):
-            grado_ent[v] += 1
+        for w in grafo.obtener_adyacentes(v):
+            grados_ent[w] += 1
     return grados_ent
+
 
 def orden_topologico_grados(grafo, paginas):
     grados_ent = grados_entrada(grafo, paginas)
     cola = deque()
-    for v in lista:
-        if grados_ent[v] = 0
+    for v in paginas:
+        if grados_ent[v] == 0:
             cola.append(v)
     resultado = []
     while len(cola) != 0:
