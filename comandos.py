@@ -153,6 +153,25 @@ def lectura(grafo, paginas):
         resultado = ", ".join(orden)
         print(resultado)
 
+def ciclo_dfs(grafo, v, camino, n):
+    camino.append(v)
+    if len(camino) == n+1:
+        return True
+    for w in grafo.obtener_adyacentes(v):
+        if ciclo_dfs(grafo, w, camino, n):
+            return True
+    visitados.remove(v)
+    camino.pop()
+    return False
+
+def ciclo(grafo, pagina, n):
+    camino = []
+    ciclo_dfs(grafo, pagina, camino, n)
+    if len(camino) != n+1 or camino[n] != pagina:
+        print("No se encontro recorrido")
+    else:
+        resultado = " -> ".join(camino)
+        print(resultado)
 
 def main():
     grafo = Grafo(True)
@@ -161,17 +180,18 @@ def main():
     grafo.agregar_vertice("C")
     grafo.agregar_vertice("D")
     grafo.agregar_vertice("E")
-    grafo.agregar_vertice("F")
-    grafo.agregar_vertice("G")
-    grafo.agregar_vertice("H")
-    grafo.agregar_arista("C", "D")
+    # grafo.agregar_vertice("F")
+    # grafo.agregar_vertice("G")
+    # grafo.agregar_vertice("H")
     grafo.agregar_arista("A", "C")
-    grafo.agregar_arista("B", "C")
+    grafo.agregar_arista("C", "B")
     grafo.agregar_arista("B", "D")
-    grafo.agregar_arista("C", "E")
-    grafo.agregar_arista("E", "F")
-    grafo.agregar_arista("F", "G")
-    grafo.agregar_arista("G", "H")
+    grafo.agregar_arista("D", "E")
+    grafo.agregar_arista("E", "C")
+    # grafo.agregar_arista("E", "F")
+    # grafo.agregar_arista("F", "G")
+    # grafo.agregar_arista("G", "H")
     #comunidades(grafo, "A")
+    ciclo(grafo, "B", 5)
 
 main()
