@@ -28,20 +28,14 @@ def componentes_fuertemente_conexas(
     mb[v] = orden[v]
     pila.appendleft(v)
     apilados.add(v)
-
     for w in grafo.obtener_adyacentes(v):
         if w not in visitados:
-            #print(f'{w} no esta visitado, lo visito')
             orden[w] = orden[v] + 1
             componentes_fuertemente_conexas(
                 w, grafo, visitados, apilados, orden, mb, pila, todas_cfc
             )
-
         if w in apilados:
-            #if mb[v] > mb[w]:
-                #print(f'wii {v} bajo su mb de {mb[v]} a {mb[w]} gracias a la coneccion con {w}')
             mb[v] = min(mb[v], mb[w])
-
     if orden[v] == mb[v] and len(pila) > 0:
         nueva_cfc = []
         while True:
@@ -50,6 +44,33 @@ def componentes_fuertemente_conexas(
             nueva_cfc.append(w)
             if w == v:
                 break
-
-        #print('NUEVA CFC!: ', nueva_cfc)
         todas_cfc.append(nueva_cfc)
+
+
+def grados_entrada(grafo, paginas):
+    grados_ent = {}
+    for v in paginas:
+        grados_ent[v] = 0
+    for v in paginas:
+        for w in grafo.adyacentes(v):
+            grado_ent[v] += 1
+    return grados_ent
+
+def orden_topologico_grados(grafo, paginas):
+    grados_ent = grados_entrada(grafo, paginas)
+    cola = deque()
+    for v in lista:
+        if grados_ent[v] = 0
+            cola.append(v)
+    resultado = []
+    while len(cola) != 0:
+        v = cola.pop()
+        resultado.append(v)
+        for w in grafo.adyacentes(v):
+            grados_ent[w] -= 1
+            if grados_ent[w] == 0:
+                cola.append(w)
+    if len(resultado) == len(paginas):
+        return resultado
+    else:
+        return None
