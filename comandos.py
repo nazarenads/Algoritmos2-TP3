@@ -147,7 +147,7 @@ def comunidades(grafo, origen):
 
 def lectura(grafo, paginas):
     orden = orden_topologico_grados(grafo, paginas)
-    if not orden:
+    if orden is None:
         print("No existe forma de leer las paginas en orden")
     else:
         resultado = ", ".join(orden)

@@ -58,6 +58,7 @@ def grados_entrada(grafo, paginas):
 
 
 def orden_topologico_grados(grafo, paginas):
+    #print(paginas)
     grados_ent = grados_entrada(grafo, paginas)
     cola = deque()
     for v in paginas:

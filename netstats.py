@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 import os
 import sys
-import faulthandler;
-
-from grafo_utils import orden_topologico_grados
+import faulthandler
 
 faulthandler.enable()
 
@@ -13,7 +11,9 @@ from comandos import (
     todos_en_rango,
     navegacion_primer_link,
     conectividad,
-    comunidades)
+    comunidades,
+    lectura
+)
 from constantes import (
     LISTA_COMANDOS,
     COMANDO_CAMINO_MINIMO,
@@ -87,8 +87,7 @@ def procesar_comandos(grafo, stdin):
             comunidades(grafo, comandos[1])
         elif comando == COMANDO_LECTURA:
             parametros = comandos[1].split(",")
-            resultado = orden_topologico_grados(grafo, parametros)
-            print(resultado)
+            lectura(grafo, parametros)
 
 
 if __name__ == '__main__':
