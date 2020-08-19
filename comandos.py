@@ -1,3 +1,5 @@
+import random
+
 from constantes import LISTA_COMANDOS
 from grafo_utils import *
 from grafo import Grafo
@@ -161,7 +163,5 @@ def main():
     grafo.agregar_arista("F", "G")
     grafo.agregar_arista("G", "H")
     #comunidades(grafo, "A")
-    vecinos = obtener_vecinos(grafo, "D")
-    print(vecinos)
 
 main()
