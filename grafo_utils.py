@@ -49,7 +49,7 @@ def componentes_fuertemente_conexas(
 
 def grados_entrada(grafo, paginas):
     grados_ent = {}
-    for v in paginas:
+    for v in grafo.obtener_vertices():
         grados_ent[v] = 0
     for v in paginas:
         for w in grafo.obtener_adyacentes(v):
@@ -67,7 +67,7 @@ def orden_topologico_grados(grafo, paginas):
     while len(cola) != 0:
         v = cola.pop()
         resultado.append(v)
-        for w in grafo.adyacentes(v):
+        for w in grafo.obtener_adyacentes(v):
             grados_ent[w] -= 1
             if grados_ent[w] == 0:
                 cola.append(w)
