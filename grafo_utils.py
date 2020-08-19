@@ -51,17 +51,18 @@ def grados_entrada(grafo, paginas):
     grados_ent = {}
     for v in grafo.obtener_vertices():
         grados_ent[v] = 0
-    for v in paginas:
+    for v in grafo.obtener_vertices():
         for w in grafo.obtener_adyacentes(v):
-            grados_ent[w] += 1
+            if v in paginas:
+                grados_ent[w] += 1
     return grados_ent
 
 
 def orden_topologico_grados(grafo, paginas):
-    #print(paginas)
     grados_ent = grados_entrada(grafo, paginas)
     cola = deque()
     for v in paginas:
+        print(v, grados_ent[v])
         if grados_ent[v] == 0:
             cola.append(v)
     resultado = []
@@ -69,9 +70,10 @@ def orden_topologico_grados(grafo, paginas):
         v = cola.pop()
         resultado.append(v)
         for w in grafo.obtener_adyacentes(v):
-            grados_ent[w] -= 1
-            if grados_ent[w] == 0:
-                cola.append(w)
+            if w in paginas:
+                grados_ent[w] -= 1
+                if grados_ent[w] == 0:
+                    cola.append(w)
     if len(resultado) == len(paginas):
         return resultado
     else:
