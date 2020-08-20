@@ -19,15 +19,10 @@ def reconstruir_camino(padres, origen, destino):
     return camino
 
 def mostrar_camino(camino, destino, orden):
-    resultado = ""
-    for v in camino:
-        if v != destino:
-            resultado += v + " -> "
-        else:
-            resultado += v
     if destino not in orden:
         print("No se encontro recorrido")
     else:
+        resultado = " -> ".join(camino)
         print(resultado)
 
 def imprimir_costo(destino, orden):
@@ -110,41 +105,6 @@ def conectividad(grafo, origen, cfc_guardada):
     return cfc_guardada
 
 
-def max_frec(label, vecinos):
-    frecuencias = {}
-    for i in vecinos: # Recorro vecinos y voy contando la frequencia con la que aparece cada etiqueta
-        etiqueta = label[i]
-        if etiqueta not in frecuencias:
-            frecuencias[etiqueta] = 1
-        else:
-            frecuencias[etiqueta] += 1
-    return max(frecuencias, key=frecuencias.get) # devuelvo la etiqueta con mayor frecuencia
-
-def comunidades(grafo, origen):
-    label = {}
-    vertices = grafo.obtener_vertices()
-    for i in range(grafo.ver_cantidad_vertices()): # Asigno una etiqueta a cada vertice del grafo
-        label[vertices[i]] = i
-    random.shuffle(vertices) # Determino un orden aleatorio para recorrer los vertices
-    for v in vertices:
-        vecinos = []
-        for w in vertices:
-            if v in grafo.obtener_adyacentes(w): # Obtengo vecinos de v
-                vecinos.append(w)
-        label[v] = max_frec(label, vecinos) # Actualizo etiqueta de v
-    etiqueta_de_origen = label[origen]
-    comunidad_del_origen = []
-    for etiqueta in label.items(): # Busco la comunidad de origen
-        if etiqueta[1] == etiqueta_de_origen:
-            comunidad_del_origen.append(etiqueta[0])
-    resultado = ""
-    for v in comunidad_del_origen:
-        if v != comunidad_del_origen[len(comunidad_del_origen)-1]:
-            resultado += v + ", "
-        else:
-            resultado += v
-    print(resultado)
-
 def lectura(grafo, paginas):
     orden = orden_topologico_grados(grafo, paginas)
     if orden is None:
@@ -155,12 +115,15 @@ def lectura(grafo, paginas):
 
 def ciclo_dfs(grafo, v, camino, n):
     camino.append(v)
-    if len(camino) == n+1:
+    if len(camino) == n+1 and camino[n] == camino[0]:
         return True
+    if len(camino) > n+1:
+        camino.pop()
+        return False
     for w in grafo.obtener_adyacentes(v):
+        if w != camino[0] and w in camino: continue
         if ciclo_dfs(grafo, w, camino, n):
             return True
-    visitados.remove(v)
     camino.pop()
     return False
 
@@ -172,26 +135,3 @@ def ciclo(grafo, pagina, n):
     else:
         resultado = " -> ".join(camino)
         print(resultado)
-
-def main():
-    grafo = Grafo(True)
-    grafo.agregar_vertice("A")
-    grafo.agregar_vertice("B")
-    grafo.agregar_vertice("C")
-    grafo.agregar_vertice("D")
-    grafo.agregar_vertice("E")
-    # grafo.agregar_vertice("F")
-    # grafo.agregar_vertice("G")
-    # grafo.agregar_vertice("H")
-    grafo.agregar_arista("A", "C")
-    grafo.agregar_arista("C", "B")
-    grafo.agregar_arista("B", "D")
-    grafo.agregar_arista("D", "E")
-    grafo.agregar_arista("E", "C")
-    # grafo.agregar_arista("E", "F")
-    # grafo.agregar_arista("F", "G")
-    # grafo.agregar_arista("G", "H")
-    #comunidades(grafo, "A")
-    ciclo(grafo, "B", 5)
-
-main()
