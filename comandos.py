@@ -4,9 +4,7 @@ from constantes import LISTA_COMANDOS
 from grafo_utils import *
 from grafo import Grafo
 
-def imprimir_operaciones():
-    for comando in LISTA_COMANDOS[1:]:
-        print(comando)
+# FUNCIONES AUXILIARES
 
 def reconstruir_camino(padres, origen, destino):
     camino = []
@@ -18,21 +16,27 @@ def reconstruir_camino(padres, origen, destino):
     camino.reverse()
     return camino
 
-def mostrar_camino(camino, destino, orden):
-    if destino not in orden:
-        print("No se encontro recorrido")
-    else:
-        resultado = " -> ".join(camino)
-        print(resultado)
+def mostrar_camino(camino):
+    resultado = " -> ".join(camino)
+    print(resultado)
 
 def imprimir_costo(destino, orden):
     print(f"Costo: {orden[destino]}")
 
 
+# COMANDOS
+
+def imprimir_operaciones():
+    for comando in LISTA_COMANDOS[1:]:
+        print(comando)
+
 def camino_minimo(grafo, origen, destino=None):
     padres, orden = bfs(grafo, origen, destino)
     camino = reconstruir_camino(padres, origen, destino)
-    mostrar_camino(camino, destino, orden)
+    if destino not in orden:
+        print("No se encontro recorrido")
+    else:
+        mostrar_camino(camino)
     imprimir_costo(destino, orden)
 
 def diametro(grafo):
@@ -51,8 +55,9 @@ def diametro(grafo):
             destino_max = max(orden, key=orden_max.get)
             origen_max = v
     camino_max = reconstruir_camino(padres_max, origen_max, destino_max)
-    mostrar_camino(camino_max, destino_max, orden_max)
+    mostrar_camino(camino_max)
     imprimir_costo(destino_max, orden_max)
+
 
 def todos_en_rango(grafo, pagina, n):
     padres, orden = bfs(grafo, pagina)
@@ -69,13 +74,7 @@ def navegacion_primer_link(grafo, origen):
     camino.append(origen)
     orden[origen] = 0
     _dfs_primer_link(grafo, origen, orden, camino)
-    last_index = len(camino) - 1
-    resultado = ""
-    for v in camino[:last_index]:
-        resultado += v + " -> "
-    resultado += camino[last_index]
-    print(resultado)
-
+    mostrar_camino(camino)
 
 def _dfs_primer_link(grafo, vertice, orden, camino):
     adyacentes = grafo.obtener_adyacentes(vertice)
@@ -133,5 +132,4 @@ def ciclo(grafo, pagina, n):
     if len(camino) != n+1 or camino[n] != pagina:
         print("No se encontro recorrido")
     else:
-        resultado = " -> ".join(camino)
-        print(resultado)
+        mostrar_camino(camino)
