@@ -9,9 +9,9 @@ from comandos import (
     diametro,
     imprimir_operaciones,
     todos_en_rango,
+    camino_minimo,
     navegacion_primer_link,
     conectividad,
-    comunidades,
     lectura,
     ciclo)
 from constantes import (
@@ -22,7 +22,7 @@ from constantes import (
     COMANDO_RANGO,
     COMANDO_NAVEGACION,
     COMANDO_CONECTIVIDAD,
-    COMANDO_COMUNIDADES, COMANDO_LECTURA, COMANDO_CICLO)
+    COMANDO_LECTURA, COMANDO_CICLO)
 from grafo import Grafo
 
 
@@ -71,7 +71,8 @@ def procesar_comandos(grafo, stdin):
         if comando not in LISTA_COMANDOS:
             print(f"El comando {entrada} no existe.")
         if comando == COMANDO_CAMINO_MINIMO:
-            print("camino minimo")
+            parametros = comandos[1].split(",")
+            camino_minimo(grafo, parametros[0], parametros[1])
         elif comando == COMANDO_DIAMETRO:
             diametro(grafo)
         elif comando == COMANDO_LISTAR_OPERACIONES:
@@ -83,8 +84,6 @@ def procesar_comandos(grafo, stdin):
             navegacion_primer_link(grafo, comandos[1])
         elif comando == COMANDO_CONECTIVIDAD:
             cfc_guardada = conectividad(grafo, comandos[1], cfc_guardada)
-        elif comando == COMANDO_COMUNIDADES:
-            comunidades(grafo, comandos[1])
         elif comando == COMANDO_LECTURA:
             parametros = comandos[1].split(",")
             lectura(grafo, parametros)
