@@ -62,7 +62,6 @@ def procesar_archivo(archivo_tsv, grafo):
 
 
 def procesar_comandos(grafo, stdin):
-    print("Ingrese un comando:")
     cfc_guardada = []
     for entrada in stdin:
         entrada = entrada.rstrip()
