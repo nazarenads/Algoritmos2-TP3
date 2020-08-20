@@ -53,10 +53,9 @@ def grados_entrada(grafo, vertices):
         grados_ent[v] = 0
     for v in vertices:
         for w in grafo.obtener_adyacentes(v):
-            if v in vertices and w in grados_ent:
+            if w in vertices:
                 grados_ent[w] += 1
     return grados_ent
-
 
 def orden_topologico_grados(grafo, vertices):
     grados_ent = grados_entrada(grafo, vertices)
