@@ -37,7 +37,7 @@ def camino_minimo(grafo, origen, destino=None):
         print("No se encontro recorrido")
     else:
         mostrar_camino(camino)
-    imprimir_costo(destino, orden)
+        imprimir_costo(destino, orden)
 
 def diametro(grafo):
     orden_max = {}
