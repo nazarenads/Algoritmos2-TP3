@@ -4,6 +4,7 @@ from constantes import LISTA_COMANDOS
 from grafo_utils import *
 from grafo import Grafo
 
+
 # FUNCIONES AUXILIARES
 
 def reconstruir_camino(padres, origen, destino):
@@ -16,9 +17,11 @@ def reconstruir_camino(padres, origen, destino):
     camino.reverse()
     return camino
 
+
 def mostrar_camino(camino):
     resultado = " -> ".join(camino)
     print(resultado)
+
 
 def imprimir_costo(destino, orden):
     print(f"Costo: {orden[destino]}")
@@ -30,6 +33,7 @@ def imprimir_operaciones():
     for comando in LISTA_COMANDOS[1:]:
         print(comando)
 
+
 def camino_minimo(grafo, origen, destino=None):
     padres, orden = bfs(grafo, origen, destino)
     camino = reconstruir_camino(padres, origen, destino)
@@ -38,6 +42,7 @@ def camino_minimo(grafo, origen, destino=None):
     else:
         mostrar_camino(camino)
         imprimir_costo(destino, orden)
+
 
 def diametro(grafo):
     orden_max = {}
@@ -48,7 +53,7 @@ def diametro(grafo):
     for v in grafo.obtener_vertices():
         padres, orden = bfs(grafo, v)
         costo = max(orden.values())
-        if(costo > costo_max):
+        if (costo > costo_max):
             costo_max = costo
             orden_max = orden
             padres_max = padres
@@ -76,6 +81,7 @@ def navegacion_primer_link(grafo, origen):
     _dfs_primer_link(grafo, origen, orden, camino)
     mostrar_camino(camino)
 
+
 def _dfs_primer_link(grafo, vertice, orden, camino):
     adyacentes = grafo.obtener_adyacentes(vertice)
     if len(adyacentes) == 0 or orden[vertice] == 20:
@@ -98,25 +104,33 @@ def conectividad(grafo, origen, cfc_guardada):
         componentes_fuertemente_conexas(
             origen, grafo, visitados, apilados, orden, mb, pila, todas_cfc
         )
-        cfc_guardada = todas_cfc[len(todas_cfc)-1]
+        cfc_guardada = todas_cfc[len(todas_cfc) - 1]
     resultado = ", ".join(cfc_guardada)
     print(resultado)
     return cfc_guardada
 
 
 def lectura(grafo, paginas):
-    orden = orden_topologico_grados(grafo, paginas)
+    grafo_paginas = Grafo(True)
+    for v in paginas:
+        grafo_paginas.agregar_vertice(v)
+    for v in grafo_paginas.obtener_vertices():
+        for w in grafo.obtener_adyacentes(v):
+            if w in paginas:
+                grafo_paginas.agregar_arista(w, v)
+    orden = orden_topologico_grados(grafo_paginas)
     if orden is None:
         print("No existe forma de leer las paginas en orden")
     else:
         resultado = ", ".join(orden)
         print(resultado)
 
+
 def ciclo_dfs(grafo, v, camino, n):
     camino.append(v)
-    if len(camino) == n+1 and camino[n] == camino[0]:
+    if len(camino) == n + 1 and camino[n] == camino[0]:
         return True
-    if len(camino) > n+1:
+    if len(camino) > n + 1:
         camino.pop()
         return False
     for w in grafo.obtener_adyacentes(v):
@@ -126,10 +140,11 @@ def ciclo_dfs(grafo, v, camino, n):
     camino.pop()
     return False
 
+
 def ciclo(grafo, pagina, n):
     camino = []
     ciclo_dfs(grafo, pagina, camino, n)
-    if len(camino) != n+1 or camino[n] != pagina:
+    if len(camino) != n + 1 or camino[n] != pagina:
         print("No se encontro recorrido")
     else:
         mostrar_camino(camino)

@@ -57,7 +57,8 @@ def grados_entrada(grafo, vertices):
                 grados_ent[w] += 1
     return grados_ent
 
-def orden_topologico_grados(grafo, vertices):
+def orden_topologico_grados(grafo):
+    vertices = grafo.obtener_vertices()
     grados_ent = grados_entrada(grafo, vertices)
     cola = deque()
     for v in vertices:
