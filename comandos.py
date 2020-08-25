@@ -7,6 +7,16 @@ from grafo import Grafo
 
 # FUNCIONES AUXILIARES
 
+def crear_grafo_paginas(grafo, paginas):
+    grafo_paginas = Grafo(True)
+    for v in paginas:
+        grafo_paginas.agregar_vertice(v)
+    for v in grafo_paginas.obtener_vertices():
+        for w in grafo.obtener_adyacentes(v):
+            if w in paginas:
+                grafo_paginas.agregar_arista(w, v)
+    return grafo_paginas
+
 def reconstruir_camino(padres, origen, destino):
     camino = []
     v = destino
@@ -111,13 +121,7 @@ def conectividad(grafo, origen, cfc_guardada):
 
 
 def lectura(grafo, paginas):
-    grafo_paginas = Grafo(True)
-    for v in paginas:
-        grafo_paginas.agregar_vertice(v)
-    for v in grafo_paginas.obtener_vertices():
-        for w in grafo.obtener_adyacentes(v):
-            if w in paginas:
-                grafo_paginas.agregar_arista(w, v)
+    grafo_paginas = crear_grafo_paginas(grafo, paginas)
     orden = orden_topologico_grados(grafo_paginas)
     if orden is None:
         print("No existe forma de leer las paginas en orden")
